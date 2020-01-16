@@ -1,12 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cmn-Hans">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="wap-font-scale" content="no" />
+    <title>Object 的数据侦测</title>
   </head>
   <body>
+<pre><code>import { Observer } from './observer';
+import Watcher from './observer/watch';
+
+const obj = {
+  age: 999,
+  child: {
+    name: 'z'
+  }
+};
+new Observer(obj);
+
+new Watcher(obj, 'age', (newValue, oldValue) => {
+  console.log('------', newValue, oldValue);
+});
+new Watcher(obj, 'child.name', (newValue, oldValue) => {
+  console.log('------', newValue, oldValue);
+});
+
+obj.age = 2;
+obj.child.name = 'y';</code></pre>
+<p><a href="https://github.com/forever-z-133/learn-vue-source-code/tree/master/%E5%8F%98%E5%8C%96%E4%BE%A6%E6%B5%8B%E7%AF%87/1%20Object%20%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BE%A6%E6%B5%8B">查看源码</a></p>
     <script src="index.js"></script>
   </body>
 </html>
